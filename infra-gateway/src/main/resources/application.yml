@@ -1,0 +1,22 @@
+server:
+  port: 8765
+  address: localhost
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: route_service_order
+        uri: ${test.uri} # uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
+        predicates:
+        - Path=/order/**
+        filters:
+        - StripPrefix=1
+        #discovery:
+          #locator:
+            #enabled: true
+            #lower-case-service-id: true
+
+test:
+  uri: lb://tams-order
