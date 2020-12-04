@@ -31,7 +31,10 @@
     </dependencyManagement>
 
     <modules>
-        <module>tams-order</module>
+        <module>tams-microservice1</module>
+        <module>tams-microservice2</module>
+        <module>infra-gateway</module>
+        <module>infra-configserver</module>
     </modules>
 
 </project>

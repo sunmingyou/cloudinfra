@@ -5,18 +5,22 @@ spring:
   application:
     name: api-gateway
   cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
     gateway:
+      discovery:
+        locator:
+          enabled: true #å¼€å¯ä»æ³¨å†Œä¸­å¿ƒåŠ¨æ€åˆ›å»ºè·¯ç”±ï¼Œåˆ©ç”¨å¾®æœåŠ¡åè¿›è¡Œè·¯ç”±,å¥½åƒæ— å½±å“
+          lower-case-service-id: true
       routes:
       - id: route_service_order
-        uri: ${test.uri} # uriÒÔlb://¿ªÍ·£¨lb´ú±í´Ó×¢²áÖĞĞÄ»ñÈ¡·şÎñ£©£¬ºóÃæ½ÓµÄ¾ÍÊÇÄãĞèÒª×ª·¢µ½µÄ·şÎñÃû³Æ
+        uri: ${test.uri} #lbè¡¨ç¤ºæ˜¯å¾®æœåŠ¡
         predicates:
         - Path=/order/**
         filters:
         - StripPrefix=1
-        #discovery:
-          #locator:
-            #enabled: true
-            #lower-case-service-id: true
+
 
 test:
   uri: lb://tams-order
